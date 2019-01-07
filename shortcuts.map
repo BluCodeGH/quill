@@ -1,0 +1,14 @@
+^O+{} openf
+^S save
+_^S+{} saveas
+^Q quit
+^N newtab
+^W closetab
+^T+{} switchtab
+^F regex
+^R+{} run
+
+^A+^B+^C+^D+^E quit
+^A+^B+^C+^F+^G quit
+^A+{}+{}+^D echo
+KEY_ESC nul
