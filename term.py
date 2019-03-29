@@ -1,4 +1,5 @@
 import os
+import select
 import sys
 import termios
 
@@ -30,7 +31,7 @@ def wrapper(fn, alternate=True):
     # disable echo, disable canonical mode (line buffering and basic editing), disable 'implementation defined input processing', disable signals
     new[3] &= ~(termios.ECHO | termios.ICANON | termios.IEXTEN | termios.ISIG)
     # return data after every 1 character, wait 0.0 seconds before doing so.
-    new[6][termios.VMIN] = 1
+    new[6][termios.VMIN] = 0
     new[6][termios.VTIME] = 0
     termios.tcsetattr(fd, termios.TCSADRAIN, new)
     if alternate:
@@ -44,6 +45,8 @@ def wrapper(fn, alternate=True):
 """
 keymaps:
 normal keys = their ascii values
+bs = 127
+del = 27 91 51 126
 ctrl a-z = 1 - 26
 ctrl:
   ` = 0
@@ -72,6 +75,7 @@ shift+special: same as above replace 59 53 with 59 50
 
 modMap = {
     27:{
+        None:"esc",
         -1:"_",
         79:{
             80:"f1",
@@ -177,26 +181,40 @@ modMap = {
             53: {126:"pageUp"},
             54: {126:"pageDown"},
             72: "home",
-            70: "end"
+            70: "end",
+            51: {126:"del"}
         }
-    }
+    },
+    127:"bs"
+}
+symMap = {
+    "^J":"\n",
+    "^I":"\t"
 }
 
-def getkey(mmap=None):
-  key = ord(sys.stdin.read(1))
-  if mmap is None:
-    mmap = modMap
-  return _process(key, mmap)
+def getkey():
+  keyBuf = []
+  select.select([sys.stdin], [], [])
+  while True:
+    c = sys.stdin.read(1)
+    if c == "":
+      res = _process(keyBuf, modMap)
+      if res in symMap:
+        return symMap[res]
+      return res
+    keyBuf.append(ord(c))
 
-def _process(key, mmap):
+
+def _process(keyBuf, mmap):
+  if not keyBuf:
+    key = None
+  key = keyBuf[0]
   if key in mmap:
     if isinstance(mmap[key], dict):
-      return getkey(mmap[key])
+      return _process(keyBuf[1:], mmap[key])
     return mmap[key]
   if -1 in mmap:
-    return mmap[-1] + _process(key, modMap)
-  if key == 0:
-    return "^ "
+    return mmap[-1] + _process(keyBuf, modMap)
   if key < 27:
     return "^" + chr(key + 64)
   if key < 32:
@@ -218,23 +236,20 @@ def save():
 def restore():
   _out("u")
 
-def _fmt(n):
-  _out(str(n) + "m")
-
 def reset():
-  _fmt(0)
+  _out("0m")
 def bold():
-  _fmt(1)
+  _out("1m")
 def dim():
-  _fmt(2)
+  _out("2m")
 def underline():
-  _fmt(4)
+  _out("4m")
 def reverse():
-  _fmt(7)
+  _out("7m")
 def strikethrough():
-  _fmt(9)
+  _out("9m")
 def doubleUnderline():
-  _fmt(21)
+  _out("21m")
 
 def color(fg, bg):
   if fg > 7:
@@ -243,12 +258,12 @@ def color(fg, bg):
     bg += 53
   fg += 30
   bg += 40
-  _fmt(fg)
-  _fmt(bg)
+  _out(str(fg) + "m")
+  _out(str(bg) + "m")
 
 def rgbColor(fg, bg):
-  _fmt("38;2;{};{};{}".format(*fg))
-  _fmt("48;2;{};{};{}".format(*bg))
+  _out("38;2;{};{};{}m".format(*fg))
+  _out("48;2;{};{};{}m".format(*bg))
 
 def resetColor():
-  _fmt("39;49")
+  _out("39;49m")
