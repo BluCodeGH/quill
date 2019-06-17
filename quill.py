@@ -62,7 +62,7 @@ class Quill:
       if i != 0:
         self.bar.addstr(" | ", fmt)
       if i == self.focus:
-        fmt = self.editors[self.focus].main.text.theme
+        fmt = self.editors[self.focus].main.theme
       self.bar.addstr(name, fmt)
     self.bar.refresh(0, 0, 0, 0, 1, self.size[0] - 1)
     self.editors[self.focus].main.update()
