@@ -226,7 +226,7 @@ def write(s):
   sys.stdout.flush()
 
 def move(x, y):
-  _out("{};{}H".format(x, y))
+  _out("{};{}H".format(y + 1, x + 1))
 
 def clear():
   _out("2J")
