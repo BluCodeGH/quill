@@ -1,0 +1,952 @@
+INFO:root:Starting quill.
+INFO:root:Starting quill.
+INFO:root:Starting quill.
+INFO:root:Starting quill.
+DEBUG:root:[]
+INFO:root:Starting quill.
+DEBUG:root:(0, 0)
+DEBUG:root:[]
+DEBUG:root:(0, 1)
+DEBUG:root:[]
+DEBUG:root:(0, 2)
+DEBUG:root:[]
+DEBUG:root:(0, 3)
+DEBUG:root:[]
+DEBUG:root:(0, 4)
+DEBUG:root:[]
+DEBUG:root:(0, 5)
+DEBUG:root:[1]
+DEBUG:root:(0, 1)
+DEBUG:root:(1, 6)
+DEBUG:root:[2]
+DEBUG:root:(0, 2)
+DEBUG:root:(2, 7)
+DEBUG:root:[3]
+DEBUG:root:(0, 3)
+DEBUG:root:(3, 8)
+DEBUG:root:[4]
+DEBUG:root:(0, 4)
+DEBUG:root:(4, 9)
+DEBUG:root:[5]
+DEBUG:root:(0, 5)
+DEBUG:root:(5, 10)
+DEBUG:root:[6]
+DEBUG:root:(0, 6)
+DEBUG:root:(6, 11)
+DEBUG:root:(0, 6)
+DEBUG:root:(6, 11)
+INFO:root:Starting quill.
+DEBUG:root:[0, 0]
+DEBUG:root:[0, 0]
+DEBUG:root:[0, 0]
+DEBUG:root:[0, 0]
+DEBUG:root:[0, 0]
+DEBUG:root:[5, 0]
+DEBUG:root:[5, 0]
+INFO:root:Starting quill.
+DEBUG:root:(0, 1)
+DEBUG:root:[0, 0]
+DEBUG:root:(0, 2)
+DEBUG:root:[0, 0]
+DEBUG:root:(0, 3)
+DEBUG:root:[0, 0]
+DEBUG:root:(0, 4)
+DEBUG:root:[0, 0]
+DEBUG:root:(0, 4)
+DEBUG:root:[4, 0]
+INFO:root:Starting quill.
+DEBUG:root:(0, 1)
+DEBUG:root:[0, 0]
+DEBUG:root:(0, 2)
+DEBUG:root:[0, 0]
+DEBUG:root:(0, 3)
+DEBUG:root:[0, 0]
+DEBUG:root:(0, 3)
+DEBUG:root:[3, 0]
+INFO:root:Starting quill.
+DEBUG:root:(0, 1)
+DEBUG:root:[0, 0]
+DEBUG:root:(0, 2)
+DEBUG:root:[0, 0]
+DEBUG:root:(0, 3)
+DEBUG:root:[0, 0]
+DEBUG:root:(0, 3)
+DEBUG:root:[1, 0]
+DEBUG:root:(0, 3)
+DEBUG:root:[2, 0]
+DEBUG:root:(0, 3)
+DEBUG:root:[3, 0]
+DEBUG:root:(0, 4)
+DEBUG:root:[3, 0]
+DEBUG:root:(0, 5)
+DEBUG:root:[3, 0]
+DEBUG:root:(0, 5)
+DEBUG:root:[4, 0]
+DEBUG:root:(0, 5)
+DEBUG:root:[4, 0]
+DEBUG:root:(0, 6)
+DEBUG:root:[4, 0]
+INFO:root:Starting quill.
+DEBUG:root:(0, 1)
+DEBUG:root:[0, 0]
+DEBUG:root:a
+DEBUG:root:(0, 2)
+DEBUG:root:[0, 0]
+DEBUG:root:ba
+DEBUG:root:(0, 3)
+DEBUG:root:[0, 0]
+DEBUG:root:cba
+DEBUG:root:(0, 1)
+DEBUG:root:[0, 0]
+DEBUG:root:
+cba
+DEBUG:root:(1, 4)
+DEBUG:root:[0, 1]
+DEBUG:root:(1, 4)
+DEBUG:root:[1, 1]
+DEBUG:root:(1, 4)
+DEBUG:root:[2, 1]
+DEBUG:root:(1, 4)
+DEBUG:root:[3, 1]
+DEBUG:root:(1, 5)
+DEBUG:root:[3, 1]
+DEBUG:root:
+cba
+
+INFO:root:Starting quill.
+DEBUG:root:(0, 1)
+DEBUG:root:[0, 0]
+DEBUG:root:a
+DEBUG:root:(0, 2)
+DEBUG:root:[0, 0]
+DEBUG:root:ba
+DEBUG:root:(0, 3)
+DEBUG:root:[0, 0]
+DEBUG:root:cba
+DEBUG:root:(0, 3)
+DEBUG:root:[1, 0]
+DEBUG:root:(0, 3)
+DEBUG:root:[2, 0]
+DEBUG:root:(0, 3)
+DEBUG:root:[3, 0]
+DEBUG:root:(0, 4)
+DEBUG:root:[3, 0]
+DEBUG:root:cba
+
+DEBUG:root:(0, 5)
+DEBUG:root:[3, 0]
+DEBUG:root:cbaf
+
+INFO:root:Starting quill.
+INFO:root:Starting quill.
+DEBUG:root:(0, 1)
+DEBUG:root:[0, 0]
+DEBUG:root:['a']
+DEBUG:root:(0, 2)
+DEBUG:root:[0, 0]
+DEBUG:root:['ba']
+DEBUG:root:(0, 3)
+DEBUG:root:[0, 0]
+DEBUG:root:['\\ba']
+DEBUG:root:(0, 3)
+DEBUG:root:[1, 0]
+INFO:root:Starting quill.
+DEBUG:root:(0, 1)
+DEBUG:root:[0, 0]
+DEBUG:root:['b']
+DEBUG:root:(0, 2)
+DEBUG:root:[0, 0]
+DEBUG:root:['ab']
+DEBUG:root:(0, 2)
+DEBUG:root:[1, 0]
+DEBUG:root:(0, 2)
+DEBUG:root:[2, 0]
+DEBUG:root:(0, 3)
+DEBUG:root:[2, 0]
+DEBUG:root:['ab\n']
+DEBUG:root:(0, 4)
+DEBUG:root:[2, 0]
+DEBUG:root:['abc\n']
+INFO:root:Starting quill.
+DEBUG:root:[]
+DEBUG:root:['a']
+DEBUG:root:[]
+DEBUG:root:['ba']
+DEBUG:root:[]
+DEBUG:root:['cba']
+DEBUG:root:[4]
+DEBUG:root:['cba\n']
+DEBUG:root:[5]
+DEBUG:root:['cbad\n']
+DEBUG:root:[6]
+DEBUG:root:['cbade\n']
+DEBUG:root:[7]
+DEBUG:root:['cbadee\n']
+Starting quill.
+[]
+['a']
+[]
+['ba']
+[]
+['cba']
+[]
+['dcba']
+[]
+['edcba']
+[]
+['fedcba']
+[]
+['gfedcba']
+[]
+['hgfedcba']
+[]
+['ihgfedcba']
+Starting quill.
+[]
+['a']
+[]
+['ba']
+[]
+['bca']
+[]
+['bdca']
+[]
+['bdeca']
+[]
+['bdceca']
+Starting quill.
+[]
+[0, 0]
+['a']
+Starting quill.
+[]
+[1, 0]
+['a']
+[]
+[2, 0]
+['ab']
+[]
+[3, 0]
+['abc']
+[4]
+[0, 0]
+['abc\n']
+Starting quill.
+[]
+['a']
+[]
+[1, 0]
+['ba']
+[]
+[2, 0]
+['bca']
+Starting quill.
+[]
+['a']
+[]
+[1, 0]
+['ba']
+[]
+[2, 0]
+['bca']
+[3]
+[3, 1]
+['bc\na']
+[3]
+['bc\nad']
+[3]
+['bc\nade']
+[3]
+['bc\nadef']
+Starting quill.
+[]
+['a']
+[]
+[1, 0]
+['ba']
+[]
+[2, 0]
+['bca']
+[4]
+['bca\n']
+[5]
+[-1, 0]
+['bcad\n']
+Starting quill.
+[]
+['a']
+[]
+[2, 0]
+['ba']
+[]
+['bac']
+Starting quill.
+[]
+['a']
+Starting quill.
+[]
+[1, 0]
+['a']
+[]
+[2, 0]
+['ab']
+[]
+[3, 0]
+['abc']
+[4]
+[4, 1]
+['abc\n']
+[5]
+[-1, 0]
+['abcd\n']
+[6]
+[-6, 0]
+Starting quill.
+[]
+[1, 0]
+['a']
+[]
+[2, 0]
+['ab']
+[]
+[3, 0]
+['abc']
+[4]
+[4, 1]
+['abc\n']
+[5]
+[-1, 0]
+['abcd\n']
+Starting quill.
+[]
+[1, 0]
+['a']
+[]
+[2, 0]
+['ab']
+[]
+[3, 0]
+['abc']
+[4]
+[4, 1]
+['abc\n']
+[5]
+[-1, 0]
+['abcd\n']
+Starting quill.
+[1, 0]
+['a']
+[2, 0]
+['ab']
+[3, 0]
+['abc']
+[4, 1]
+['abc\n']
+[-1, 0]
+['abcd\n']
+Starting quill.
+[1, 0]
+['a', 1]
+[2, 0]
+['ab', 2]
+[3, 0]
+['abc', 3]
+[4, 1]
+['abc\n', 3]
+[-1, 0]
+['abcd\n', -1]
+Starting quill.
+[1, 0]
+(0, 1)
+['a', 1]
+[2, 0]
+(0, 2)
+['ab', 2]
+[3, 0]
+(0, 3)
+['abc', 3]
+[4, 1]
+(4, 4)
+['abc\n', 3]
+[-1, 0]
+(0, 5)
+['abcd\n', -1]
+Starting quill.
+[1, 0]
+(0, 1)
+['a', 1]
+[2, 0]
+(0, 2)
+['ab', 2]
+[3, 0]
+(0, 3)
+['abc', 3]
+[4, 1]
+(4, 4)
+['abc\n', 3]
+(0, 4)
+Starting quill.
+[1, 0]
+(0, 1, 0)
+['a', 1]
+[2, 0]
+(0, 2, 0)
+['ab', 2]
+[3, 0]
+(0, 3, 0)
+['abc', 3]
+[4, 1]
+(4, 4, 1)
+['abc\n', 3]
+Starting quill.
+[1, 0]
+(0, 1, 0)
+[1, 0]
+['a', 1]
+[2, 0]
+(0, 2, 0)
+[2, 0]
+['ab', 2]
+[3, 0]
+(0, 3, 0)
+[3, 0]
+['abc', 3]
+[4, 1]
+(4, 4, 1)
+[-1, 1]
+['abc\n', 3]
+(0, 4, 0)
+[3, 0]
+Starting quill.
+s[1, 0]
+(0, 1, 0)
+[1, 0]
+['a', 1]
+s[2, 0]
+(0, 2, 0)
+[2, 0]
+['ab', 2]
+s[3, 0]
+(0, 3, 0)
+[3, 0]
+['abc', 3]
+s[4, 1]
+(4, 4, 1)
+[-1, 1]
+['abc\n', 3]
+Starting quill.
+s[1, 0]
+(0, 1, 0)
+[1, 0]
+['a', [], 1]
+s[2, 0]
+(0, 2, 0)
+[2, 0]
+['ab', [], 2]
+s[3, 0]
+(0, 3, 0)
+[3, 0]
+['abc', [], 3]
+s[4, 1]
+(4, 4, 1)
+[-1, 1]
+['abc\n', [4], 3]
+Starting quill.
+['a', [], 1]
+s[1, 0]
+(0, 1, 0)
+[1, 0]
+['ab', [], 2]
+s[2, 0]
+(0, 2, 0)
+[2, 0]
+['abc', [], 3]
+s[3, 0]
+(0, 3, 0)
+[3, 0]
+['abc\n', [4], 4]
+s[4, 1]
+(4, 4, 1)
+[-1, 1]
+Starting quill.
+['a', [], 1]
+s[1, 0]
+(0, 1, 0)
+[1, 0]
+['ab', [], 2]
+s[2, 0]
+(0, 2, 0)
+[2, 0]
+['abc', [], 3]
+s[3, 0]
+(0, 3, 0)
+[3, 0]
+['abc\n', [4], 4]
+s[0, 1]
+(4, 4, 1)
+[-1, 1]
+['abcd\n', [5], 4]
+s[4, 0]
+(0, 5, 0)
+[4, 0]
+Starting quill.
+['a', [], 1]
+s[1, 0]
+(0, 1, 0)
+[1, 0]
+['ab', [], 2]
+s[2, 0]
+(0, 2, 0)
+[2, 0]
+['abc', [], 3]
+s[3, 0]
+(0, 3, 0)
+[3, 0]
+['abc\n', [4], 4]
+s[0, 1]
+(4, 4, 1)
+[0, 1]
+['abc\nd', [4], 5]
+s[1, 1]
+(4, 5, 1)
+[1, 1]
+['abc\nde', [4], 6]
+s[2, 1]
+(4, 6, 1)
+[2, 1]
+['abc\ndef', [4], 7]
+s[3, 1]
+(4, 7, 1)
+[3, 1]
+['abc\ndef\n', [4, 8], 8]
+s[0, 2]
+(8, 8, 2)
+[0, 2]
+['abc\ndef\ng', [4, 8], 9]
+s[1, 2]
+(8, 9, 2)
+[1, 2]
+['abc\ndef\ngh', [4, 8], 10]
+s[2, 2]
+(8, 10, 2)
+[2, 2]
+['abc\ndef\nghi', [4, 8], 11]
+s[3, 2]
+(8, 11, 2)
+[3, 2]
+(8, 11, 2)
+[2, 2]
+['abc\ndef\nghfi', [4, 8], 11]
+s[3, 2]
+(8, 12, 2)
+[3, 2]
+(8, 12, 2)
+[2, 2]
+(8, 12, 2)
+[1, 2]
+(8, 12, 2)
+[0, 2]
+(8, 12, 2)
+[0, 2]
+(8, 12, 2)
+[0, 2]
+(8, 12, 2)
+[0, 2]
+(8, 12, 2)
+[0, 2]
+['abc\ndef\nfghfi', [4, 8], 9]
+s[1, 2]
+(8, 13, 2)
+[1, 2]
+(8, 13, 2)
+[0, 2]
+(8, 13, 2)
+[0, 2]
+(4, 8, 1)
+[0, 1]
+['abc\nfdef\nfghfi', [4, 9], 5]
+s[1, 1]
+(4, 9, 1)
+[1, 1]
+['abc\nfedef\nfghfi', [4, 10], 6]
+s[2, 1]
+(4, 10, 1)
+[2, 1]
+['abc\nfesdef\nfghfi', [4, 11], 7]
+s[3, 1]
+(4, 11, 1)
+[3, 1]
+(4, 11, 1)
+[4, 1]
+(4, 11, 1)
+[5, 1]
+(11, 16, 2)
+[5, 2]
+['abc\nfesdef\nfghfif', [4, 11], 17]
+s[6, 2]
+(11, 17, 2)
+[6, 2]
+['abc\nfesdef\nfghfife', [4, 11], 18]
+s[7, 2]
+(11, 18, 2)
+[7, 2]
+['abc\nfesdef\nfghfifes', [4, 11], 19]
+s[8, 2]
+(11, 19, 2)
+[8, 2]
+(11, 19, 2)
+[8, 2]
+(11, 19, 2)
+[8, 2]
+(11, 19, 2)
+[8, 2]
+(11, 19, 2)
+[8, 2]
+(11, 19, 2)
+[8, 2]
+(11, 19, 2)
+[8, 2]
+['abc\nfesdef\nfghfifese', [4, 11], 20]
+s[9, 2]
+(11, 20, 2)
+[9, 2]
+['abc\nfesdef\nfghfifeses', [4, 11], 21]
+s[10, 2]
+(11, 21, 2)
+[10, 2]
+['abc\nfesdef\nfghfifesess', [4, 11, 21], 22]
+s[1, 3]
+(21, 22, 3)
+[1, 3]
+['abc\nfesdef\nfghfifesessf', [4, 11, 21], 23]
+s[2, 3]
+(21, 23, 3)
+[2, 3]
+['abc\nfesdef\nfghfifesessfe', [4, 11, 21], 24]
+s[3, 3]
+(21, 24, 3)
+[3, 3]
+['abc\nfesdef\nfghfifesessfes', [4, 11, 21], 25]
+s[4, 3]
+(21, 25, 3)
+[4, 3]
+['abc\nfesdef\nfghfifesessfesf', [4, 11, 21], 26]
+s[5, 3]
+(21, 26, 3)
+[5, 3]
+['abc\nfesdef\nfghfifesessfesfe', [4, 11, 21], 27]
+s[6, 3]
+(21, 27, 3)
+[6, 3]
+['abc\nfesdef\nfghfifesessfesfes', [4, 11, 21], 28]
+s[7, 3]
+(21, 28, 3)
+[7, 3]
+['abc\nfesdef\nfghfifesessfesfesf', [4, 11, 21], 29]
+s[8, 3]
+(21, 29, 3)
+[8, 3]
+['abc\nfesdef\nfghfifesessfesfesfe', [4, 11, 21], 30]
+s[9, 3]
+(21, 30, 3)
+[9, 3]
+['abc\nfesdef\nfghfifesessfesfesfef', [4, 11, 21], 31]
+s[10, 3]
+(21, 31, 3)
+[10, 3]
+['abc\nfesdef\nfghfifesessfesfesfeff', [4, 11, 21], 32]
+s[11, 3]
+(21, 32, 3)
+[11, 3]
+['abc\nfesdef\nfghfifesessfesfesfefff', [4, 11, 21, 32], 33]
+s[1, 4]
+(32, 33, 4)
+[1, 4]
+['abc\nfesdef\nfghfifesessfesfesfeffff', [4, 11, 21, 32], 34]
+s[2, 4]
+(32, 34, 4)
+[2, 4]
+['abc\nfesdef\nfghfifesessfesfesfefffff', [4, 11, 21, 32], 35]
+s[3, 4]
+(32, 35, 4)
+[3, 4]
+(32, 35, 4)
+[3, 4]
+(32, 35, 4)
+[3, 4]
+(32, 35, 4)
+[3, 4]
+(32, 35, 4)
+[3, 4]
+(32, 35, 4)
+[3, 4]
+(32, 35, 4)
+[3, 4]
+(32, 35, 4)
+[2, 4]
+(32, 35, 4)
+[1, 4]
+(32, 35, 4)
+[2, 4]
+(32, 35, 4)
+[3, 4]
+(32, 35, 4)
+[3, 4]
+(32, 35, 4)
+[3, 4]
+(32, 35, 4)
+[3, 4]
+(32, 35, 4)
+[3, 4]
+(32, 35, 4)
+[3, 4]
+(32, 35, 4)
+[3, 4]
+(32, 35, 4)
+[3, 4]
+(32, 35, 4)
+[3, 4]
+(32, 35, 4)
+[3, 4]
+(32, 35, 4)
+[3, 4]
+(32, 35, 4)
+[3, 4]
+(32, 35, 4)
+[3, 4]
+(32, 35, 4)
+[2, 4]
+Starting quill.
+['a', [], 1]
+s[1, 0]
+(0, 1, 0)
+[1, 0]
+['aa', [], 2]
+s[2, 0]
+(0, 2, 0)
+[2, 0]
+['aab', [], 3]
+s[3, 0]
+(0, 3, 0)
+[3, 0]
+['aabb', [], 4]
+s[4, 0]
+(0, 4, 0)
+[4, 0]
+['aabbc', [], 5]
+s[5, 0]
+(0, 5, 0)
+[5, 0]
+['aabbcc', [], 6]
+s[6, 0]
+(0, 6, 0)
+[6, 0]
+['aabbccd', [], 7]
+s[7, 0]
+(0, 7, 0)
+[7, 0]
+['aabbccdd', [], 8]
+s[8, 0]
+(0, 8, 0)
+[8, 0]
+['aabbccdde', [], 9]
+s[9, 0]
+(0, 9, 0)
+[9, 0]
+['aabbccddef', [9], 10]
+s[1, 1]
+(9, 10, 1)
+[1, 1]
+Starting quill.
+['a', [], 1]
+s[1, 0]
+(0, 1, 0)
+[1, 0]
+['aa', [], 2]
+s[2, 0]
+(0, 2, 0)
+[2, 0]
+['aab', [], 3]
+s[3, 0]
+(0, 3, 0)
+[3, 0]
+['aabb', [], 4]
+s[4, 0]
+(0, 4, 0)
+[4, 0]
+['aabbc', [], 5]
+s[5, 0]
+(0, 5, 0)
+[5, 0]
+['aabbcc', [], 6]
+s[6, 0]
+(0, 6, 0)
+[6, 0]
+['aabbccd', [], 7]
+s[7, 0]
+(0, 7, 0)
+[7, 0]
+['aabbccdd', [], 8]
+s[8, 0]
+(0, 8, 0)
+[8, 0]
+['aabbccdde', [], 9]
+s[9, 0]
+(0, 9, 0)
+[9, 0]
+['aabbccddef', [], 10]
+s[10, 0]
+(0, 10, 0)
+[10, 0]
+['aabbccddefg', [10], 11]
+s[1, 1]
+(10, 11, 1)
+[1, 1]
+['aabbccddefgh', [10], 12]
+s[2, 1]
+(10, 12, 1)
+[2, 1]
+['aabbccddefghi', [10], 13]
+s[3, 1]
+(10, 13, 1)
+[3, 1]
+['aabbccddefghi\n', [10, 14], 14]
+s[0, 2]
+(14, 14, 2)
+[0, 2]
+['aabbccddefghi\na', [10, 14], 15]
+s[1, 2]
+(14, 15, 2)
+[1, 2]
+['aabbccddefghi\naa', [10, 14], 16]
+s[2, 2]
+(14, 16, 2)
+[2, 2]
+['aabbccddefghi\naab', [10, 14], 17]
+s[3, 2]
+(14, 17, 2)
+[3, 2]
+['aabbccddefghi\naabb', [10, 14], 18]
+s[4, 2]
+(14, 18, 2)
+[4, 2]
+['aabbccddefghi\naabbc', [10, 14], 19]
+s[5, 2]
+(14, 19, 2)
+[5, 2]
+['aabbccddefghi\naabbcc', [10, 14], 20]
+s[6, 2]
+(14, 20, 2)
+[6, 2]
+['aabbccddefghi\naabbccd', [10, 14], 21]
+s[7, 2]
+(14, 21, 2)
+[7, 2]
+['aabbccddefghi\naabbccdd', [10, 14], 22]
+s[8, 2]
+(14, 22, 2)
+[8, 2]
+['aabbccddefghi\naabbccdde', [10, 14], 23]
+s[9, 2]
+(14, 23, 2)
+[9, 2]
+['aabbccddefghi\naabbccddee', [10, 14], 24]
+s[10, 2]
+(14, 24, 2)
+[10, 2]
+['aabbccddefghi\naabbccddeebs', [10, 14, 24], 26]
+s[2, 3]
+(24, 26, 3)
+[2, 3]
+['aabbccddefghi\naabbccddeebs\n', [10, 14, 24, 27], 27]
+s[0, 4]
+(27, 27, 4)
+[0, 4]
+['aabbccddefghi\naabbccddeebs\na', [10, 14, 24, 27], 28]
+s[1, 4]
+(27, 28, 4)
+[1, 4]
+['aabbccddefghi\naabbccddeebs\naa', [10, 14, 24, 27], 29]
+s[2, 4]
+(27, 29, 4)
+[2, 4]
+['aabbccddefghi\naabbccddeebs\naab', [10, 14, 24, 27], 30]
+s[3, 4]
+(27, 30, 4)
+[3, 4]
+['aabbccddefghi\naabbccddeebs\naabb', [10, 14, 24, 27], 31]
+s[4, 4]
+(27, 31, 4)
+[4, 4]
+['aabbccddefghi\naabbccddeebs\naabbc', [10, 14, 24, 27], 32]
+s[5, 4]
+(27, 32, 4)
+[5, 4]
+['aabbccddefghi\naabbccddeebs\naabbcc', [10, 14, 24, 27], 33]
+s[6, 4]
+(27, 33, 4)
+[6, 4]
+['aabbccddefghi\naabbccddeebs\naabbccd', [10, 14, 24, 27], 34]
+s[7, 4]
+(27, 34, 4)
+[7, 4]
+['aabbccddefghi\naabbccddeebs\naabbccdd', [10, 14, 24, 27], 35]
+s[8, 4]
+(27, 35, 4)
+[8, 4]
+['aabbccddefghi\naabbccddeebs\naabbccdde', [10, 14, 24, 27], 36]
+s[9, 4]
+(27, 36, 4)
+[9, 4]
+['aabbccddefghi\naabbccddeebs\naabbccddee', [10, 14, 24, 27], 37]
+s[10, 4]
+(27, 37, 4)
+[10, 4]
+['aabbccddefghi\naabbccddeebs\naabbccddeef', [10, 14, 24, 27, 37], 38]
+s[1, 5]
+(37, 38, 5)
+[1, 5]
+['aabbccddefghi\naabbccddeebs\naabbccddeefg', [10, 14, 24, 27, 37], 39]
+s[2, 5]
+(37, 39, 5)
+[2, 5]
+['aabbccddefghi\naabbccddeebs\naabbccddeefgh', [10, 14, 24, 27, 37], 40]
+s[3, 5]
+(37, 40, 5)
+[3, 5]
+['aabbccddefghi\naabbccddeebs\naabbccddeefghi', [10, 14, 24, 27, 37], 41]
+s[4, 5]
+(37, 41, 5)
+[4, 5]
+['aabbccddefghi\naabbccddeebs\naabbccddeefghij', [10, 14, 24, 27, 37], 42]
+s[5, 5]
+(37, 42, 5)
+[5, 5]
+['aabbccddefghi\naabbccddeebs\naabbccddeefghijl', [10, 14, 24, 27, 37], 43]
+s[6, 5]
+(37, 43, 5)
+[6, 5]
+['aabbccddefghi\naabbccddeebs\naabbccddeefghijlm', [10, 14, 24, 27, 37], 44]
+s[7, 5]
+(37, 44, 5)
+[7, 5]
+['aabbccddefghi\naabbccddeebs\naabbccddeefghijlmn', [10, 14, 24, 27, 37], 45]
+s[8, 5]
+(37, 45, 5)
+[8, 5]
+['aabbccddefghi\naabbccddeebs\naabbccddeefghijlmno', [10, 14, 24, 27, 37], 46]
+s[9, 5]
+(37, 46, 5)
+[9, 5]
+['aabbccddefghi\naabbccddeebs\naabbccddeefghijlmnop', [10, 14, 24, 27, 37], 47]
+s[10, 5]
+(37, 47, 5)
+[10, 5]
+['aabbccddefghi\naabbccddeebs\naabbccddeefghijlmnopq', [10, 14, 24, 27, 37], 48]
+s[11, 5]
+(37, 48, 5)
+[11, 5]
+['aabbccddefghi\naabbccddeebs\naabbccddeefghijlmnopqq', [10, 14, 24, 27, 37, 48], 49]
+s[1, 6]
+(48, 49, 6)
+[1, 6]
