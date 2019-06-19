@@ -1,190 +1,111 @@
-import curses
-
-def nc(coords):
-  return coords[1], coords[0]
-
-class TextBox:
-  def __init__(self, theme, pos, size, wrap=True):
-    self.text = Text("")
-    self.theme = theme
-    self.pos = pos
-    self.size = size
-    self.offset = [0, 0]
-    self.cursor = [0, 0]
-    self.cursori = 0
-    self.wrap = wrap
-    self.term = curses.newpad(1, 1)
-    self.term.keypad(1)
-    self.selection = [0, 0]
-
-    self.reflow()
-
-  def resize(self, pos, size):
-    self.pos = pos
-    self.size = size
-    self.reflow()
-
-  def reflow(self):
-    if self.wrap:
-      self.text.reflow(self.size[0])
-    else:
-      self.text.reflow()
-    self.getpad()
-    for i in range(len(self.text)):
-      res = self.text.getch(i)
-      if res[2] is not None:
-        if i >= self.selection[0] and i < self.selection[1]:
-          self.term.addstr(*res, self.theme | curses.A_REVERSE)
-        else:
-          self.term.addstr(*res, self.theme)
-    self.update()
-
-  def update(self):
-    pos2 = self.pos[1] + self.size[1] - 1, self.pos[0] + self.size[0] - 1
-    y, x, *_ = self.text.getch(self.cursori)
-    self.moveOffset(x, y)
-    self.term.move(y, x)
-    self.term.refresh(*nc(self.offset), *nc(self.pos), *pos2)
-
-  def getpad(self):
-    dx = max(self.size[0], self.text.size[0])
-    dy = max(self.size[1], self.text.size[1])
-    self.term.resize(dy, dx)
-    for x in range(dx):
-      for y in range(dy):
-        try:
-          self.term.addstr(y, x, " ", self.theme)
-        except curses.error:
-          pass
-
-  def handle(self, inp):
-    if inp == "KEY_RIGHT":
-      self.movex(1)
-    elif inp == "KEY_LEFT":
-      self.movex(-1)
-    elif inp == "KEY_UP":
-      self.movey(-1)
-    elif inp == "KEY_DOWN":
-      self.movey(1)
-    elif inp == "KEY_BACKSPACE":
-      if self.cursori > 0:
-        self.text.delete(self.cursori - 1, 1)
-        self.movex(-1)
-        self.reflow()
-    else:
-      self.text.insert(self.cursori, inp)
-      self.reflow()
-      self.movex(len(inp))
-
-  def write(self, text):
-    self.text.insert(self.cursori, text)
-    self.reflow()
-    self.movex(len(text))
-
-  def set(self, text):
-    self.text.set(text)
-    self.cursori = len(text)
-    self.reflow()
-
-  def movex(self, d):
-    self.cursori += d
-    self.cursori = max(min(self.cursori, len(self.text)), 0)
-    y, x, *_ = self.text.getch(self.cursori)
-    self.cursor = (x, y)
-    self.update()
-
-  def movey(self, d):
-    self.cursor = self.cursor[0], max(min(self.cursor[1] + d, self.text.size[1] - 1), 0)
-    self.cursori = self.text.getpos(*self.cursor)
-    self.update()
-
-  def moveOffset(self, x, y):
-    if self.size[1] >= 3:
-      if y < self.offset[1] + 1:
-        self.offset[1] -= self.offset[1] + 1 - y
-      if y > self.offset[1] + self.size[1] - 2:
-        self.offset[1] += y - (self.offset[1] + self.size[1] - 2)
-    else:
-      if y < self.offset[1]:
-        self.offset[1] -= self.offset[1] - y
-      if y > self.offset[1] + self.size[1] - 1:
-        self.offset[1] += y - (self.offset[1] + self.size[1] - 1)
-    if x < self.offset[0] + 1:
-      self.offset[0] -= self.offset[0] + 1 - x
-    if x > self.offset[0] + self.size[0] - 1:
-      self.offset[0] += x - (self.offset[0] + self.size[0] - 1)
-
-  keysubs = {8: "KEY_BACKSPACE", 9: "\t", 10: "\n"}
-  def getkey(self, blocking=True):
-    if not blocking:
-      curses.halfdelay(1)
-      try:
-        k = self.term.getkey()
-      except curses.error:
-        return None
-      finally:
-        curses.raw()
-    else:
-      k = self.term.getkey()
-    if len(k) > 1:
-      return k
-    if ord(k) <= 26 and ord(k) not in self.keysubs:
-      k = "^" + chr(ord(k) + 64)
-    elif ord(k) == 27:
-      k2 = self.getkey(False)
-      if k2:
-        return "_" + k2
-      return "KEY_ESC"
-    else:
-      k = self.keysubs.get(ord(k), k)
-    return k
+import logging
+import term
 
 class Text:
-  nonPrinting = "\r\n"
-  def __init__(self, contents):
-    self.contents = contents
-    self.lines = [0]
-    self.size = None
+  border = [5, 1] # distance from edge of view to start scrolling at
+  def __init__(self, pos, size, wrap=True):
+    self.pos = pos # position of the upper left corner of the view
+    self.size = size # size of the view
+    self.cursor = [0, 0] # coords of the cursor relative to the upper left corner of the document
+    self.scroll = [0, 0] # coords of the upper left corner of the view relative to the document
+    self.wrap = wrap
+    self.buffer = ""
+    self.cursori = 0 # reflected position of the cursor
+    self.linesi = []
+    self.redisplay()
 
-  def reflow(self, wrap=False):
-    dx = wrap or 0
-    self.lines = [0]
-    for i, c in enumerate(self.contents + " "):
-      if c == "\n":
-        self.lines.append(i + 1)
-      elif wrap and i - self.lines[-1] == wrap:
-        self.lines.append(i)
-      elif not wrap and i - self.lines[-1] + 1 > dx:
-        dx = i - self.lines[-1] + 1
-    self.lines.append(len(self.contents) + 1)
-    self.size = (dx + 1, len(self.lines) - 1)
+  def redisplay(self):
+    start = self.scroll[1]
+    end = self.scroll[1] + self.size[1]
+    for i, (s, e) in enumerate(zip(([0] + self.linesi)[start:end], (self.linesi + [len(self.buffer)])[start:end])):
+      term.move(self.pos[0], self.pos[1] + i)
+      s += self.scroll[0]
+      e = max(min(e, s + self.size[0]), s)
+      for c in self.buffer[s:e]:
+        if c != "\n":
+          term.write(c)
+        else:
+          term.write(" ")
+      term.write(" " * (self.size[0] - e + s))
+      #logging.debug("i {} s {} e {}".format(i, s, e))
+    complete = len((self.linesi + [len(self.buffer)])[start:end])
+    for i in range(self.size[1] - complete):
+     term.move(self.pos[0], self.pos[1] + i + complete)
+     term.write(" " * self.size[0])
 
-  def getch(self, i):
-    char = (self.contents + " ")[i]
-    if char in self.nonPrinting:
-      char = None
-    y = -1
-    for l in self.lines:
-      if l > i:
+  def getCursori(self, coords):
+    s = ([0] + self.linesi)[coords[1]]
+    e = (self.linesi + [len(self.buffer) + 1])[coords[1]]
+    cursori = s
+    cursori += min(coords[0], e - s - 1)
+    #logging.debug("coords: {}, i: {}".format(coords, cursori))
+    return cursori
+
+  def getCursor(self, cursori):
+    cursor = [None, None]
+    for i, l in enumerate(self.linesi + [len(self.buffer) + 1]):
+      if cursori < l:
+        cursor[1] = i
+        cursor[0] = cursori - ([0] + self.linesi)[i]
         break
-      y += 1
-    x = i - self.lines[y]
-    return y, x, char
+    #logging.debug("i:{}, coords:{}".format(cursori, cursor))
+    return cursor
 
-  def getpos(self, x, y):
-    i = self.lines[y]
-    if self.lines[y + 1] - self.lines[y] - 1 < x:
-      return self.lines[y + 1] - 1
-    return i + x
+  def calcLines(self):
+    x = 0
+    self.linesi = []
+    for i, c in enumerate(self.buffer):
+      x += 1
+      if x > self.size[0] and self.wrap:
+        self.linesi.append(i)
+        x = 1
+      if c == "\n":
+        self.linesi.append(i + 1)
+        x = 0
 
-  def set(self, s):
-    self.contents = s
+  def doScroll(self, c):
+    if c[0] - self.scroll[0] >= self.size[0] - self.border[0] + 1 and not self.wrap:
+      self.scroll[0] = c[0] - self.size[0] + self.border[0]
+    if c[0] - self.scroll[0] <= self.border[0] and not self.wrap:
+      self.scroll[0] = max(c[0] - self.border[0], 0)
+    if c[1] - self.scroll[1] >= self.size[1] - self.border[1]:
+      self.scroll[1] = c[1] - self.size[1] + self.border[1] + 1
+    if c[1] - self.scroll[1] <= self.border[1]:
+      self.scroll[1] = max(c[1] - self.border[1], 0)
 
-  def insert(self, i, s):
-    self.contents = self.contents[:i] + s + self.contents[i:]
+  def update(self):
+    c = self.getCursor(self.cursori)
+    self.doScroll(c)
+    self.redisplay()
+    term.move(self.pos[0] + c[0] - self.scroll[0], self.pos[1] + c[1] - self.scroll[1])
 
-  def delete(self, i, n):
-    self.contents = self.contents[:i] + self.contents[i + n:]
+  def write(self, text):
+    self.buffer = self.buffer[:self.cursori] + text + self.buffer[self.cursori:]
+    self.cursori += len(text)
+    self.calcLines()
+    #logging.debug(str([self.buffer, self.linesi]))
+    self.cursor = self.getCursor(self.cursori)
 
-  def __len__(self):
-    return len(self.contents)
+  def handle(self, key):
+    if key == "right":
+      self.cursori = min(len(self.buffer), self.cursori + 1)
+      self.cursor = self.getCursor(self.cursori)
+    elif key == "left":
+      self.cursori = max(0, self.cursori - 1)
+      self.cursor = self.getCursor(self.cursori)
+    elif key == "down":
+      self.cursor[1] = min(len(self.linesi), self.cursor[1] + 1)
+      self.cursori = self.getCursori(self.cursor)
+    elif key == "up":
+      self.cursor[1] = max(0, self.cursor[1] - 1)
+      self.cursori = self.getCursori(self.cursor)
+    elif key == "bs":
+      if self.cursori == 0:
+        return
+      self.buffer = self.buffer[:self.cursori - 1] + self.buffer[self.cursori:]
+      self.cursori -= 1
+      self.calcLines()
+      self.cursor = self.getCursor(self.cursori)
+    else:
+      self.write(key)
+    self.update()
