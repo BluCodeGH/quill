@@ -1,7 +1,7 @@
 import logging
 import term
 
-class Text:
+class Buffer:
   border = [5, 1] # distance from edge of view to start scrolling at
   def __init__(self, pos, size, wrap=True):
     self.pos = pos # position of the upper left corner of the view
@@ -13,6 +13,7 @@ class Text:
     self.cursori = 0 # reflected position of the cursor
     self.linesi = []
     self.redisplay()
+    logging.info("Started buffer at %d, %d", *pos)
 
   def redisplay(self):
     start = self.scroll[1]
@@ -51,18 +52,6 @@ class Text:
     #logging.debug("i:{}, coords:{}".format(cursori, cursor))
     return cursor
 
-  def calcLines(self):
-    x = 0
-    self.linesi = []
-    for i, c in enumerate(self.buffer):
-      x += 1
-      if x > self.size[0] and self.wrap:
-        self.linesi.append(i)
-        x = 1
-      if c == "\n":
-        self.linesi.append(i + 1)
-        x = 0
-
   def doScroll(self, c):
     if c[0] - self.scroll[0] >= self.size[0] - self.border[0] + 1 and not self.wrap:
       self.scroll[0] = c[0] - self.size[0] + self.border[0]
@@ -79,11 +68,85 @@ class Text:
     self.redisplay()
     term.move(self.pos[0] + c[0] - self.scroll[0], self.pos[1] + c[1] - self.scroll[1])
 
+  def focusCursor(self):
+    c = self.getCursor(self.cursori)
+    term.move(self.pos[0] + c[0] - self.scroll[0], self.pos[1] + c[1] - self.scroll[1])
+
   def write(self, text):
     self.buffer = self.buffer[:self.cursori] + text + self.buffer[self.cursori:]
+    start = len(self.linesi) # line index to start from
+    for i, l in enumerate(self.linesi):
+      if l > self.cursori:
+        start = i
+        break
+    x = self.cursori - ([0] + self.linesi)[start] # current offset of cursor
+    newLinesi = []
+    end = len(self.linesi) # (old) line index where things match up again
+    for i, c in enumerate(self.buffer[self.cursori:]):
+      x += 1
+      if x > self.size[0] and self.wrap:
+        x = 1
+        if i >= len(text) and self.cursori + i - len(text) in self.linesi:
+          end = self.linesi.index(self.cursori + i - len(text))
+          break
+        newLinesi.append(self.cursori + i)
+      if c == "\n":
+        x = 0
+        if i >= len(text) and self.cursori + i + 1 - len(text) in self.linesi:
+          end = self.linesi.index(self.cursori + i + 1 - len(text))
+          break
+        newLinesi.append(self.cursori + i + 1)
+    self.linesi[start:end] = newLinesi
+    for i in range(start + len(newLinesi), len(self.linesi)):
+      self.linesi[i] += len(text)
     self.cursori += len(text)
-    self.calcLines()
-    #logging.debug(str([self.buffer, self.linesi]))
+    self.cursor = self.getCursor(self.cursori)
+
+  def set(self, text):
+    self.buffer = text
+    x = 0
+    self.linesi = []
+    for i, c in enumerate(self.buffer):
+      x += 1
+      if x > self.size[0] and self.wrap:
+        self.linesi.append(i)
+        x = 1
+      if c == "\n":
+        self.linesi.append(i + 1)
+        x = 0
+    self.cursori = 0
+    self.cursor = self.getCursor(self.cursori)
+    self.update()
+
+  # delete n characters starting at index starti
+  def delete(self, starti, n):
+    self.cursori = starti
+    self.buffer = self.buffer[:starti] + self.buffer[starti+n:]
+    start = len(self.linesi) # line index to start from
+    for i, l in enumerate(self.linesi):
+      if l > self.cursori:
+        start = i
+        break
+    x = self.cursori - ([0] + self.linesi)[start] # current offset of cursor
+    newLinesi = []
+    end = len(self.linesi) # (old) line index where things match up again
+    for i, c in enumerate(self.buffer[self.cursori:]):
+      x += 1
+      if x > self.size[0] and self.wrap:
+        x = 1
+        if i >= n and self.cursori + i + n in self.linesi:
+          end = self.linesi.index(self.cursori + i + n)
+          break
+        newLinesi.append(self.cursori + i)
+      if c == "\n":
+        x = 0
+        if i >= n and self.cursori + i + 1 + n in self.linesi:
+          end = self.linesi.index(self.cursori + i + 1 + n)
+          break
+        newLinesi.append(self.cursori + i + 1)
+    self.linesi[start:end] = newLinesi
+    for i in range(start + len(newLinesi), len(self.linesi)):
+      self.linesi[i] -= n
     self.cursor = self.getCursor(self.cursori)
 
   def handle(self, key):
@@ -102,10 +165,7 @@ class Text:
     elif key == "bs":
       if self.cursori == 0:
         return
-      self.buffer = self.buffer[:self.cursori - 1] + self.buffer[self.cursori:]
-      self.cursori -= 1
-      self.calcLines()
-      self.cursor = self.getCursor(self.cursori)
+      self.delete(self.cursori - 1, 1)
     else:
       self.write(key)
     self.update()
