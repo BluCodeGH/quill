@@ -7,14 +7,17 @@ class Tab:
   def __init__(self, pos, size, wrap=True):
     self.main = Buffer(pos, (size[0], size[1] - 1), wrap)
     self.status = Buffer((pos[0], pos[1] + size[1] - 1), (size[0], 1), False)
+    self.updateStatus()
+    self.main.draw()
 
   def handle(self, key):
     self.main.handle(key)
     self.updateStatus()
+    self.main.draw()
 
   def updateStatus(self):
-    self.status.set(str(self.main.getCursor(self.main.cursori)))
-    self.main.focusCursor()
+    self.status.set(str(self.main.getPos(self.main.cursori)))
+    self.status.draw()
 
 def main():
   logging.info("Starting quill.")
